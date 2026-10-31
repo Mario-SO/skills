@@ -29,7 +29,7 @@ Use two independent reviewers from different model families and providers by def
 
 Give each member the target snapshot, raw requirements, repository instructions, relevant source locations, and available check results. Use this brief:
 
-> Independently review the specified change and its connected code against the requirements and repository instructions. Check correctness, missed callers, regressions, error handling, security, accessibility where relevant, test quality, performance where the change affects it, and unnecessary complexity. Prioritize concrete defects introduced or exposed by this change. For each finding, give a precise location, triggering conditions, user impact, supporting evidence, and the smallest correction. Separate verified defects from hypotheses. Report verification limits and remaining risks. Make no edits, post no comments, and launch no agents.
+> Independently review the specified change and its connected code against the requirements and repository instructions. Check correctness, missed callers, regressions, error handling, security, accessibility where relevant, test quality, performance where the change affects it, and unnecessary complexity. Explicitly answer: "What existing code can solve this?" and "Which proposed changes are unnecessary?" Support simplification proposals with source evidence and preserve required behavior. Prioritize concrete defects introduced or exposed by this change. For each finding, give a precise location, triggering conditions, user impact, supporting evidence, and the smallest correction. Separate verified defects from hypotheses. Report verification limits and remaining risks. Make no edits, post no comments, and launch no agents.
 
 ## 3. Verify and reconcile
 

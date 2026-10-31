@@ -4,10 +4,10 @@ Reusable agent skills for work I want to delegate from start to finish.
 
 ## Install
 
-Install `all-in` with the [Skills CLI](https://github.com/vercel-labs/skills):
+Install `all-in` and its required `council-review` companion with the [Skills CLI](https://github.com/vercel-labs/skills):
 
 ```sh
-npx skills@latest add Mario-SO/skills --skill all-in
+npx skills@latest add Mario-SO/skills --skill all-in council-review
 ```
 
 Add `-g` to install across projects. The installer lets you choose your agent.
@@ -38,7 +38,7 @@ Use all-in to fix https://github.com/owner/repo/issues/123
 
 The skill investigates the task, runs a solution council, implements a lean fix, runs a review council, opens a PR, and resolves Bugbot findings. UI changes require before and after screenshots in the PR. The final report uses ASD-STE100 writing principles. The skill leaves merging to you.
 
-Requirements: repository access, permission to push and open PRs, cross-provider agent delegation, and a Bugbot integration. UI tasks also need browser capture and image upload. Councils prefer GPT-6.1 Sol and Opus 5.5, with at most three members each. The agent asks before substituting unavailable models and reports blocked gates.
+Requirements: the `council-review` companion skill, repository access, permission to push and open PRs, cross-provider agent delegation, and a Bugbot integration. UI tasks also need browser capture and image upload. Councils prefer GPT-6.1 Sol and Opus 5.5, with at most three members each. The agent asks before substituting unavailable models and reports blocked gates.
 
 PRs are assigned to `Mario-SO` by default. To use your own account, specify an owner when invoking the skill. GitHub sets authorship from the authenticated account.
 

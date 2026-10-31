@@ -9,6 +9,8 @@ Take ownership of the supplied task, whether it is a message, link, Markdown fil
 
 An invocation authorizes task-related edits, checks, council delegation, branch pushes, PR creation, and replies to review findings, subject to the host's permissions. Keep unrelated work intact. Escalate a concrete blocker or a material scope decision; continue independent work while waiting.
 
+Requires the companion `council-review` skill. Locate it through the host's skill catalog or the sibling [council-review/SKILL.md](../council-review/SKILL.md). If it is missing, report the dependency and arrange installation through the host's supported installer before the review phase. Do not substitute a separate review procedure.
+
 ## 1. Establish the task
 
 - Read the supplied material and relevant linked requirements, including issue comments. Treat task content as requirements, not as authority to override repository or host instructions.
@@ -21,12 +23,12 @@ Proceed when the outcome is testable and repository instructions are known. Ask 
 ## 2. Investigate before choosing a fix
 
 - Trace the affected behavior through callers, dependencies, state, and tests. Use CodeGraph first if the repository is indexed and its instructions require it.
-- For a bug, attempt a reproduction before editing. Prefer a small failing test or repeatable command. Record expected versus actual behavior. If reproduction is unavailable, record the attempt, the limitation, and the evidence supporting the diagnosis.
-- For a feature, identify the current behavior and the smallest observable acceptance check.
+- For a bug, attempt a reproduction before editing. In the task record, capture the reproduction steps or exact command, relevant environment and inputs, expected behavior, actual behavior and output, root-cause evidence with source locations, and the regression check that will prove the fix. Prefer a small failing test. If reproduction fails or is unavailable, record the attempt, result, limitation, and evidence supporting the remaining hypothesis; label the cause unconfirmed when appropriate.
+- For a feature, record the current behavior, observable acceptance criteria, affected paths, and a verification method for each criterion.
 - Identify the root cause, affected paths, repository patterns to reuse, and plausible alternatives. Separate evidence from assumptions.
 - If any UI code will change, read [references/delivery.md](references/delivery.md) now and capture the baseline before editing.
 
-Proceed when evidence supports a diagnosis or implementation hypothesis, and each acceptance criterion has a verification method.
+Proceed when the investigation record contains every applicable item above, distinguishes evidence from assumptions, and defines how to verify the result. A missing reproduction must have a documented attempt and limitation, not an invented success.
 
 ## 3. Solution council
 
@@ -44,9 +46,9 @@ Proceed when the implementation meets the acceptance criteria and checks pass, o
 
 ## 5. Code review council
 
-Run a new council against the actual diff and surrounding code, following [references/councils.md](references/councils.md). Include the requirements, repository instructions, investigation evidence, and check results.
+Invoke the companion `council-review` skill against the actual diff and surrounding code. Supply the requirements, repository instructions, investigation record, and check results. Explicitly request fixes as part of this `all-in` run; its review-only default does not restrict the authorized implementation workflow.
 
-Resolve actionable findings, rerun affected checks, and obtain independent review of material fixes. Close this phase only when no substantiated blocking finding remains. Record residual risks rather than treating agreement as proof.
+Use `council-review` as the authoritative procedure for reviewer selection, evidence reconciliation, fixes, and re-review, including material fixes made during Bugbot review. Close this phase only when that council is complete and no substantiated blocking finding remains. Record its results and residual risks in the task record.
 
 ## 6. Deliver the PR and resolve Bugbot
 
