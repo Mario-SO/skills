@@ -18,14 +18,6 @@ To install the standalone council review skill:
 npx skills@latest add Mario-SO/skills --skill council-review
 ```
 
-## council
-
-Theo's council skill, copied as supplied. It uses three providers for review or feedback, tracks review scores by round, and repeats review after fixes.
-
-```sh
-npx skills@latest add Mario-SO/skills --skill council
-```
-
 ## council-review
 
 ```text
