@@ -1,36 +1,32 @@
 # PR delivery
 
-## UI evidence
+## Description
 
-When the task includes UI code, include actual before and after screenshots in the PR description. Capture the baseline on the original revision before edits, and capture the result after verification. Use the same viewport, route, data, and interaction state so the change is comparable. Cover each materially different changed state.
+Write for a reader who never saw the task conversation, in ASD-STE100 Simplified Technical English with at most 20 words per sentence. Keep non-visual content at or below 200 words, including headings and template text. The visual and its labels, alt text, and short captions sit outside the limit.
 
-Use the host's authorized browser and screenshot tools. If the baseline was missed, capture it in a separate host-managed workspace on the original revision; preserve current edits. Inspect screenshots for exposed secrets or personal data before upload.
+Use the repository's PR template with these sections:
 
-Embed labeled images using uploaded attachments or repository-permitted URLs that PR readers can access. Local file paths are insufficient. Verify that the PR description renders both images. If browser access, a running UI, representative data, or attachment upload is unavailable, state the specific blocker and request the missing capability. Do not fabricate images or mark the screenshot gate complete.
+- **Before:** the trigger, previous behavior, user impact, and cause.
+- **After:** the corrected behavior, how the fix produces it, and the scope of the change.
+- **Verification:** checks and results, limits, and both councils with actual models and resolved objections. Link the originating issue or task.
+- **Visual:** when behavior changes, a labeled before and after of the same scenario, embedded in the description. UI changes use paired screenshots from [ui-evidence.md](ui-evidence.md). Otherwise pick the simplest fit: a Mermaid flow or sequence diagram for control flow, a state diagram for transitions, or a comparison table for inputs and outputs. Base it on observed evidence or verified code paths, and label a conceptual diagram as conceptual.
 
-## Ownership and PR content
+If mandatory template content cannot fit in 200 words, report the conflict. After each update, recount the words and confirm the visual renders and matches the latest head.
 
-Default the PR owner to Mario, GitHub login `Mario-SO`. Honor an explicit owner override from the invoking user so other people can install the skill. Assign the PR to that login and verify the assignee.
+## Ownership
 
-GitHub attributes PR authorship to the authenticated account. Check that account before creation. If Mario must also be the author and the session uses another account, request authorized account access through the host's credential flow. Do not impersonate Mario or alter commit authorship to fake ownership. If assignment is unavailable, report the failed ownership gate.
+Assign the PR to `Mario-SO`
 
-Use the repository's PR template. Lead with the user-visible issue and the resulting behavior. Include:
-
-- Cause and scope of the fix, with the originating issue or task link.
-- Checks and results, plus any verification limits.
-- A concise record of both councils, actual models used, and resolved material objections.
-- Labeled before and after screenshots for UI work.
-
-Open a ready-for-review PR once local gates pass. Use issue-closing keywords only when the PR fully resolves the issue. Follow host requirements to link the PR immediately after creation or push. Leave it open for the user to merge.
+Open the PR ready for review. Use issue-closing keywords only when the PR fully resolves the issue.
 
 ## Bugbot loop
 
-1. Discover the repository's Bugbot integration and documented trigger. Read PR review summaries, inline review threads, top-level comments, and check runs. Record the head SHA being reviewed. Trigger or request review through the supported mechanism if needed.
-2. Wait for an explicit completed Bugbot review or completed Bugbot check associated with that head. An empty comment list does not establish completion. Also wait for required CI checks.
-3. Read every new finding and inspect its affected code. Fix supported defects with the smallest correct change. For false positives, reply with evidence. For a code defect that needs no code change, explain why. Keep unresolved real defects open.
-4. Rerun affected checks. Obtain council re-review for material changes. Push fixes, update the task record with the new head, and wait for Bugbot and required checks again. Refresh screenshots if UI behavior changes.
-5. Finish when Bugbot has completed on the latest head, all findings have a documented disposition, no substantiated blocking findings remain, and required checks pass. Recheck the head before claiming completion.
+1. Find the repository's Bugbot trigger. Record the head SHA, and trigger a review if needed.
+2. Wait for a completed Bugbot review or check on that head. Completion is an explicit completed status; an empty comment list is not one.
+3. Inspect the code behind every new finding. Fix real defects with the smallest correct change. Reply with evidence to false positives. Unfixed real defects stay open.
+4. Rerun affected checks, send material fixes back through the council review, and push. Update the task record and PR description, then return to step 2.
+5. Done when Bugbot has completed on the latest head, every finding has a documented disposition, no substantiated blocking finding remains, and required checks pass.
 
-Use host-provided PR watchers for external waits. In T3, use `watch_pull_request` when checks or reviews remain pending; provide the PR URL and continuation context, then end the turn as pending. Resume the loop on notification. Follow host unwatch rules before final handback. Without a watcher, use the host's supported bounded wait mechanism.
+Use the host's PR watcher for external waits, ending the turn as pending and resuming on notification.
 
-If Bugbot is absent, cannot be triggered, fails repeatedly, or does not finish within the host's permitted wait, report the exact status. Ask for access, integration setup, or an explicit waiver. A waiver must appear in the final report as skipped review, never as Bugbot approval. Escalate repeated external failures instead of retrying indefinitely. Preserve the PR and task state so work can resume.
+If Bugbot is absent, cannot be triggered, keeps failing, or exceeds the permitted wait, report the exact status. Ask for access, setup, or an explicit waiver. Report a waiver as "Bugbot skipped". Escalate repeated failures, and preserve the PR and task state so work can resume.
